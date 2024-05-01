@@ -26,7 +26,7 @@ When building integrations between APIs one is often faced with stichting those 
 - many are code first/only like [JOLT](https://jolt-demo.appspot.com/#incept)
 - [Ballerina Data Mapper](https://ballerina.io/learn/vs-code-extension/implement-the-c) - Data Mapper is pretty spot on, but is ballerina, a language I'm not familiar with yet. Does this exist for Javascript?
 - https://www.postman.com/product/flows/ - can this do object mapping or only "steps" of the flow? It seems to only work by exposing paramaters. I can't really map complicated json objects quickly
-
+- [JSONCrack](https://jsoncrack.com/) great visualization, but i don't understand how the "compare data" works and whether it would help with mapping/transforming
 
 #
 # Recommended IDE Setup
