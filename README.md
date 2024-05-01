@@ -26,19 +26,20 @@ When building integrations between APIs one is often faced with stichting those 
 - [X] Apply the transformation live
 - [X] Deploy to github pages https://janmechtel.github.io/schema-bridge/
 - [X] test it with easy stuff recreate the [sample from Ballerina data mapper](https://ballerina.io/learn/vs-code-extension/implement-the-code/data-mapper/)
-- [ ] test/support arrays - How to deal with their type?
+- [X] add a new component "editor" that for now only contains the textarea, the content should be 2-way bound from the app.vue
 
 - [ ] add a target area
 - [ ] show a diff between transformation output and target
-
 - [ ] better editor (json syntax highlighting etc.)
+
 
 - [ ] visual mapping (without editing) - show a table, highlight back to the code areas? can everything stay in one line?
 
-- [ ] easy way to import & export everything
 - [ ] filtering (only show fields that are mapped or not mapped)
+- [ ] test/support arrays - How to deal with their type?
+- [ ] easy way to import & export everything
 - [ ] work with OpenAPI spec 
-- [ ] support for descriptions types,and required fields
+- [ ] support for descriptions types and required fields
 - [ ] enable editing in the visual part
 
 # Recommended IDE Setup

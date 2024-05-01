@@ -2,6 +2,8 @@
 import jsonata from 'jsonata';
 import { ref, watch } from 'vue';
 
+import Editor from './components/Editor.vue';
+  
 const jsonInput = ref(`{
   "id": "1001",
   "firstName": "Vinnie",
@@ -39,15 +41,15 @@ watch([jsonInput, jsonataExpression], () => {
   <div class="text-area-container">
     <div class="column">
       <h3>JSON Input</h3>
-      <textarea v-model="jsonInput" placeholder="Enter JSON here..."></textarea>
+      <Editor v-model="jsonInput" />
     </div>
     <div class="column">
       <h3>JSONata Expression</h3>
-      <textarea v-model="jsonataExpression" placeholder="Enter JSONata expression here..."></textarea>
+      <Editor v-model="jsonataExpression" />
     </div>
     <div class="column">
       <h3>Transformation Result</h3>
-      <textarea v-model="transformationResult" placeholder="Transformation result" readonly></textarea>
+      <Editor v-model="transformationResult" />
     </div>
   </div>
 </template>
@@ -58,32 +60,17 @@ watch([jsonInput, jsonataExpression], () => {
   height: 100vh;
   width: 100%;
 }
-
 .column {
   flex: 1;
   padding: 0 10px;
 }
-
 .column:first-child {
   padding-left: 0;
 }
-
 .column:last-child {
   padding-right: 0;
 }
-
-textarea {
-  width: 100%;
-  height: 90%;
-  /* Adjusted to leave space for headers */
-  padding: 8px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-h1,
-h3 {
-  margin-bottom: 10px;
-}
 </style>
+
+
+
