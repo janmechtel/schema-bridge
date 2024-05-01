@@ -1,41 +1,50 @@
 <script setup lang="ts">
 import jsonata from 'jsonata';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 const jsonInput = ref('{ "name": "Wilbur" }');
-const greeting = ref('');
+const jsonataExpression = ref('"Hello, " & name');
+const transformationResult = ref('');
 
-function handleGreeting() {
-  const json = JSON.parse(jsonInput.value);
-  const expression = jsonata('"Hello, " & name');
-  expression.evaluate(json).then(result => {
-    greeting.value = result;
-  });
-}
+// Watch for changes in jsonInput or jsonataExpression and apply transformation
+watch([jsonInput, jsonataExpression], () => {
+  try {
+    const json = JSON.parse(jsonInput.value);
+    const expression = jsonata(jsonataExpression.value);
+    expression.evaluate(json).then(result => {
+      transformationResult.value = result;
+    });
+  } catch (error) {
+    transformationResult.value = 'Error in transformation: ' + error.message;
+  }
+}, { immediate: true });
+
 </script>
 
 <template>
-  <textarea v-model="jsonInput" placeholder="Enter JSON here..."></textarea>
-  <button @click="handleGreeting">Click me</button>
-  <p>{{ greeting }}</p>
+  <div class="text-area-container">
+    <textarea v-model="jsonInput" placeholder="Enter JSON here..."></textarea>
+    <textarea v-model="jsonataExpression" placeholder="Enter JSONata expression here..."></textarea>
+    <textarea v-model="transformationResult" placeholder="Transformation result" readonly></textarea>
+  </div>
 </template>
 
 <style scoped>
+.text-area-container {
+  display: flex;
+  height:95vh;
+}
 textarea {
-  width: 100%;
-  height: 100px;
-  margin-bottom: 10px;
+  flex: 1;
+  margin: 0 10px;
   padding: 8px;
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-button {
-  padding: 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-}
 </style>
+
+
 
 
 

@@ -13,13 +13,23 @@ When building integrations between APIs one is often faced with stichting those 
   - connect the target and source values visually
   - documentation - the visual aspect is important to help readers, as this is easier to understand/digest the integration, not only "build" it. Also it serves as a kind of todo-list. It's easy to see if something isn't mapped yet
 
-## Existing tools
+## TODOs
+
+- [X] make the transformation editable
+- [X] Apply the transformation live
+- [ ] better editor (json syntax highlighting etc.)
+- [ ] easy way to import export everything
+
+
+# Existing tools
 
 - many are code first/only like [JOLT](https://jolt-demo.appspot.com/#incept)
 - [Ballerina Data Mapper](https://ballerina.io/learn/vs-code-extension/implement-the-c) - Data Mapper is pretty spot on, but is ballerina, a language I'm not familiar with yet. Does this exist for Javascript?
 - https://www.postman.com/product/flows/ - can this do object mapping or only "steps" of the flow? It seems to only work by exposing paramaters. I can't really map complicated json objects quickly
 
-## Recommended IDE Setup
+
+#
+# Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
 
