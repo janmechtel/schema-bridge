@@ -16,6 +16,7 @@ const jsonataExpression = ref(`{
   "name" : firstName & " " & lastName
 }`);
 const transformationResult = ref('');
+const jsonTargetOutput = ref('');  // Initialize the new reactive variable for JSON Target Output
 
 // Watch for changes in jsonInput or jsonataExpression and apply transformation
 watch([jsonInput, jsonataExpression], () => {
@@ -51,6 +52,10 @@ watch([jsonInput, jsonataExpression], () => {
       <h3>Transformation Result</h3>
       <Editor v-model="transformationResult" />
     </div>
+    <div class="column">
+      <h3>JSON Target Output</h3>
+      <Editor v-model="jsonTargetOutput" />
+    </div>
   </div>
 </template>
 
@@ -71,6 +76,10 @@ watch([jsonInput, jsonataExpression], () => {
   padding-right: 0;
 }
 </style>
+
+
+
+
 
 
 
