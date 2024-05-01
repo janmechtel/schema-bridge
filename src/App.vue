@@ -2,7 +2,7 @@
 import jsonata from 'jsonata';
 import { ref, watch } from 'vue';
 
-import Editor from './components/Editor.vue';
+import Editor from './components/JsonEditor.vue';
   
 const jsonInput = ref(`{
   "id": "1001",
@@ -18,7 +18,7 @@ const jsonataExpression = ref(`{
 const transformationResult = ref('');
 const jsonTargetOutput = ref(`{
   "id": "1001",
-   "name": "Vinnie Hickman"
+  "name": "Vinnie Hickman"
 }
 `);  // Initialize the new reactive variable for JSON Target Output
 
