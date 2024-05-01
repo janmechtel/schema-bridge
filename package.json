@@ -13,6 +13,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "jsonata": "^2.0.4",
     "vue": "^3.4.21"
   },
   "devDependencies": {
