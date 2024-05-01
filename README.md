@@ -17,8 +17,23 @@ When building integrations between APIs one is often faced with stichting those 
 
 - [X] make the transformation editable
 - [X] Apply the transformation live
+- [ ] Deploy to github pages
+- [ ] test it with easy stuff recreate the sample from Ballerina data mapper
+- [ ] test/support arrays
+
+- [ ] add a target area
+- [ ] show a diff between transformation output and target
+
 - [ ] better editor (json syntax highlighting etc.)
-- [ ] easy way to import export everything
+
+- [ ] visual mapping (without editing) - show a table, highlight back to the code areas? can everything stay in one line?
+
+- [ ] easy way to import & export everything
+- [ ] filtering (only show fields that are mapped or not mapped)
+- [ ] work with OpenAPI spec 
+- [ ] support for descriptions types,and required fields
+- [ ] enable editing in the visual part
+
 
 
 # Existing tools

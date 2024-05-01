@@ -22,28 +22,51 @@ watch([jsonInput, jsonataExpression], () => {
 </script>
 
 <template>
+  <h1>Schema-Bridge</h1>
   <div class="text-area-container">
-    <textarea v-model="jsonInput" placeholder="Enter JSON here..."></textarea>
-    <textarea v-model="jsonataExpression" placeholder="Enter JSONata expression here..."></textarea>
-    <textarea v-model="transformationResult" placeholder="Transformation result" readonly></textarea>
+    <div class="column">
+      <h3>JSON Input</h3>
+      <textarea v-model="jsonInput" placeholder="Enter JSON here..."></textarea>
+    </div>
+    <div class="column">
+      <h3>JSONata Expression</h3>
+      <textarea v-model="jsonataExpression" placeholder="Enter JSONata expression here..."></textarea>
+    </div>
+    <div class="column">
+      <h3>Transformation Result</h3>
+      <textarea v-model="transformationResult" placeholder="Transformation result" readonly></textarea>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .text-area-container {
   display: flex;
-  height:95vh;
+  height: 100vh;
+  width: 100%;
+}
+.column {
+  flex: 1;
+  padding: 0 10px;
+}
+.column:first-child {
+  padding-left: 0;
+}
+.column:last-child {
+  padding-right: 0;
 }
 textarea {
-  flex: 1;
-  margin: 0 10px;
+  width: 100%;
+  height: 90%; /* Adjusted to leave space for headers */
   padding: 8px;
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+h1, h3 {
+  margin-bottom: 10px;
+}
 </style>
-
 
 
 
