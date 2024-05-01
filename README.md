@@ -28,7 +28,7 @@ When building integrations between APIs one is often faced with stichting those 
 - [X] test it with easy stuff recreate the [sample from Ballerina data mapper](https://ballerina.io/learn/vs-code-extension/implement-the-code/data-mapper/)
 - [X] add a new component "editor" that for now only contains the textarea, the content should be 2-way bound from the app.vue
 
-- [ ] add a target area
+- [X] add a target area
 - [ ] show a diff between transformation output and target
 - [ ] better editor (json syntax highlighting etc.)
 

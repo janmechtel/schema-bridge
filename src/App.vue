@@ -13,10 +13,14 @@ const jsonInput = ref(`{
 }`);
 const jsonataExpression = ref(`{ 
   "id": id,
-  "name" : firstName & " " & lastName
+  "name" : firstName & " " & "try to include the last name here"
 }`);
 const transformationResult = ref('');
-const jsonTargetOutput = ref('');  // Initialize the new reactive variable for JSON Target Output
+const jsonTargetOutput = ref(`{
+  "id": "1001",
+   "name": "Vinnie Hickman"
+}
+`);  // Initialize the new reactive variable for JSON Target Output
 
 // Watch for changes in jsonInput or jsonataExpression and apply transformation
 watch([jsonInput, jsonataExpression], () => {
