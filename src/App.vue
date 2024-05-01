@@ -2,8 +2,17 @@
 import jsonata from 'jsonata';
 import { ref, watch } from 'vue';
 
-const jsonInput = ref('{ "name": "Wilbur" }');
-const jsonataExpression = ref('"Hello, " & name');
+const jsonInput = ref(`{
+  "id": "1001",
+  "firstName": "Vinnie",
+  "lastName": "Hickman",
+  "age": 15,
+  "country": "UK"
+}`);
+const jsonataExpression = ref(`{ 
+  "id": id,
+  "name" : firstName & " " & lastName
+}`);
 const transformationResult = ref('');
 
 // Watch for changes in jsonInput or jsonataExpression and apply transformation
@@ -12,10 +21,10 @@ watch([jsonInput, jsonataExpression], () => {
     const json = JSON.parse(jsonInput.value);
     const expression = jsonata(jsonataExpression.value);
     expression.evaluate(json).then(result => {
-      transformationResult.value = result;
+      transformationResult.value = JSON.stringify(result, null, 2);;
     });
   } catch (error) {
-     if (error instanceof Error) {
+    if (error instanceof Error) {
       transformationResult.value = 'Error in transformation: ' + error.message;
     } else {
       transformationResult.value = "unknown type of the error " + error
@@ -49,30 +58,32 @@ watch([jsonInput, jsonataExpression], () => {
   height: 100vh;
   width: 100%;
 }
+
 .column {
   flex: 1;
   padding: 0 10px;
 }
+
 .column:first-child {
   padding-left: 0;
 }
+
 .column:last-child {
   padding-right: 0;
 }
+
 textarea {
   width: 100%;
-  height: 90%; /* Adjusted to leave space for headers */
+  height: 90%;
+  /* Adjusted to leave space for headers */
   padding: 8px;
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-h1, h3 {
+
+h1,
+h3 {
   margin-bottom: 10px;
 }
 </style>
-
-
-
-
-

@@ -25,8 +25,8 @@ When building integrations between APIs one is often faced with stichting those 
 - [X] make the transformation editable
 - [X] Apply the transformation live
 - [X] Deploy to github pages https://janmechtel.github.io/schema-bridge/
-- [ ] test it with easy stuff recreate the sample from Ballerina data mapper
-- [ ] test/support arrays
+- [X] test it with easy stuff recreate the [sample from Ballerina data mapper](https://ballerina.io/learn/vs-code-extension/implement-the-code/data-mapper/)
+- [ ] test/support arrays - How to deal with their type?
 
 - [ ] add a target area
 - [ ] show a diff between transformation output and target
