@@ -15,7 +15,7 @@
     "predeploy": "npm run build"
   },
   "dependencies": {
-    "json-editor-vue": "^0.15.0",
+    "@guolao/vue-monaco-editor": "^1.5.1",
     "jsonata": "^2.0.4",
     "vue": "^3.4.21"
   },

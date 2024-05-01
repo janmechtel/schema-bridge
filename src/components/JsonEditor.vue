@@ -1,16 +1,28 @@
 <script setup lang="ts">
 
-import JsonEditorVue from 'json-editor-vue'
-const model = defineModel()
+import { VueMonacoEditor } from '@guolao/vue-monaco-editor'
+const model = defineModel<string | undefined>()
+
+
+const MONACO_EDITOR_OPTIONS = {
+  automaticLayout: true,
+  formatOnType: true,
+  formatOnPaste: true,
+  minimap: {
+    enabled: false
+  },
+}
+
 
 </script>
 
 <template>
-  <JsonEditorVue 
-    v-model="model" 
-    v-bind="{/* local props & attrs */ }" 
-    :stringified="false" 
-    mode="text"/>
+  <VueMonacoEditor
+    v-model:value="model" 
+    theme="vs-dark"
+    language="json"
+    :options="MONACO_EDITOR_OPTIONS"  
+  />
 </template>
 
 <style scoped></style>

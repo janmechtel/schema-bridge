@@ -1,26 +1,32 @@
 <script setup lang="ts">
+import { loader } from '@guolao/vue-monaco-editor'
+loader.config({
+  paths: {
+    vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.43.0/min/vs',
+  },
+})
+
 import jsonata from 'jsonata';
 import { ref, watch } from 'vue';
 
 import Editor from './components/JsonEditor.vue';
   
-const jsonInput = ref(JSON.parse(`{
+const jsonInput = ref(`{
   "id": "1001",
   "firstName": "Vinnie",
   "lastName": "Hickman",
   "age": 15,
   "country": "UK"
-}`));
+}`);
 const jsonataExpression = ref(`{ 
   "id": id,
   "name" : firstName & " " & "try to include the last name here"
 }`);
 const transformationResult = ref('');
-const jsonTargetOutput = ref(JSON.parse(`{
+const jsonTargetOutput = ref(`{
   "id": "1001",
   "name": "Vinnie Hickman"
-}
-`));  // Initialize the new reactive variable for JSON Target Output
+}`);
 
 // Watch for changes in jsonInput or jsonataExpression and apply transformation
 watch([jsonInput, jsonataExpression], () => {
@@ -28,7 +34,7 @@ watch([jsonInput, jsonataExpression], () => {
     const json = JSON.parse(jsonInput.value);
     const expression = jsonata(jsonataExpression.value);
     expression.evaluate(json).then(result => {
-      transformationResult.value = result;
+      transformationResult.value = JSON.stringify(result, null, 2);
     });
   } catch (error) {
     if (error instanceof Error) {
@@ -46,19 +52,19 @@ watch([jsonInput, jsonataExpression], () => {
   <div class="text-area-container">
     <div class="column">
       <h3>JSON Input</h3>
-      <Editor v-model="jsonInput" />
+      <Editor v-model:value="jsonInput"/>
     </div>
     <div class="column">
       <h3>JSONata Expression</h3>
-      <Editor v-model="jsonataExpression" />
+      <Editor v-model:value="jsonataExpression" />
     </div>
     <div class="column">
       <h3>Transformation Result</h3>
-      <Editor v-model="transformationResult" />
+      <Editor v-model:value="transformationResult" />
     </div>
     <div class="column">
       <h3>JSON Target Output</h3>
-      <Editor v-model="jsonTargetOutput" />
+      <Editor v-model:value="jsonTargetOutput" />
     </div>
   </div>
 </template>
