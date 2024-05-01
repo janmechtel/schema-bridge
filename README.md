@@ -29,8 +29,12 @@ When building integrations between APIs one is often faced with stichting those 
 - [X] add a new component "editor" that for now only contains the textarea, the content should be 2-way bound from the app.vue
 
 - [X] add a target area
-- [ ] show a diff between transformation output and target
 - [ ] better editor (json syntax highlighting etc.)
+      - how to put the default value inside?  
+      - make it full screen again
+      - can json-editor-vue validate again jsonata?
+      - 
+- [ ] show a diff between transformation output and target
 
 
 - [ ] visual mapping (without editing) - show a table, highlight back to the code areas? can everything stay in one line?

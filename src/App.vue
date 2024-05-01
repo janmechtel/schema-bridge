@@ -4,23 +4,23 @@ import { ref, watch } from 'vue';
 
 import Editor from './components/JsonEditor.vue';
   
-const jsonInput = ref(`{
+const jsonInput = ref(JSON.parse(`{
   "id": "1001",
   "firstName": "Vinnie",
   "lastName": "Hickman",
   "age": 15,
   "country": "UK"
-}`);
+}`));
 const jsonataExpression = ref(`{ 
   "id": id,
   "name" : firstName & " " & "try to include the last name here"
 }`);
 const transformationResult = ref('');
-const jsonTargetOutput = ref(`{
+const jsonTargetOutput = ref(JSON.parse(`{
   "id": "1001",
   "name": "Vinnie Hickman"
 }
-`);  // Initialize the new reactive variable for JSON Target Output
+`));  // Initialize the new reactive variable for JSON Target Output
 
 // Watch for changes in jsonInput or jsonataExpression and apply transformation
 watch([jsonInput, jsonataExpression], () => {
@@ -28,7 +28,7 @@ watch([jsonInput, jsonataExpression], () => {
     const json = JSON.parse(jsonInput.value);
     const expression = jsonata(jsonataExpression.value);
     expression.evaluate(json).then(result => {
-      transformationResult.value = JSON.stringify(result, null, 2);;
+      transformationResult.value = result;
     });
   } catch (error) {
     if (error instanceof Error) {
