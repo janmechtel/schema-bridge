@@ -13,11 +13,18 @@ When building integrations between APIs one is often faced with stichting those 
   - connect the target and source values visually
   - documentation - the visual aspect is important to help readers, as this is easier to understand/digest the integration, not only "build" it. Also it serves as a kind of todo-list. It's easy to see if something isn't mapped yet
 
-## TODOs
+## Existing tools / alternatives / inspiration
+
+- [Ballerina Data Mapper](https://ballerina.io/learn/vs-code-extension/implement-the-c) - Data Mapper is pretty spot on, but is ballerina, a language I'm not familiar with yet. Does this exist for Javascript?
+- many are code first/only like [JOLT](https://jolt-demo.appspot.com/#incept)
+- https://www.postman.com/product/flows/ - can this do object mapping or only "steps" of the flow? It seems to only work by exposing paramaters. I can't really map complicated json objects quickly
+- [JSONCrack](https://jsoncrack.com/) great visualization, but i don't understand how the "compare data" works and whether it would help with mapping/transforming
+
+## Roadmap
 
 - [X] make the transformation editable
 - [X] Apply the transformation live
-- [ ] Deploy to github pages
+- [X] Deploy to github pages https://janmechtel.github.io/schema-bridge/
 - [ ] test it with easy stuff recreate the sample from Ballerina data mapper
 - [ ] test/support arrays
 
@@ -34,16 +41,6 @@ When building integrations between APIs one is often faced with stichting those 
 - [ ] support for descriptions types,and required fields
 - [ ] enable editing in the visual part
 
-
-
-# Existing tools
-
-- many are code first/only like [JOLT](https://jolt-demo.appspot.com/#incept)
-- [Ballerina Data Mapper](https://ballerina.io/learn/vs-code-extension/implement-the-c) - Data Mapper is pretty spot on, but is ballerina, a language I'm not familiar with yet. Does this exist for Javascript?
-- https://www.postman.com/product/flows/ - can this do object mapping or only "steps" of the flow? It seems to only work by exposing paramaters. I can't really map complicated json objects quickly
-- [JSONCrack](https://jsoncrack.com/) great visualization, but i don't understand how the "compare data" works and whether it would help with mapping/transforming
-
-#
 # Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
@@ -72,6 +69,12 @@ npm run dev
 
 ```sh
 npm run build
+```
+
+### Deploy to GitHub pages
+
+```sh
+npm run deploy
 ```
 
 ### Lint with [ESLint](https://eslint.org/)

@@ -15,7 +15,11 @@ watch([jsonInput, jsonataExpression], () => {
       transformationResult.value = result;
     });
   } catch (error) {
-    transformationResult.value = 'Error in transformation: ' + error.message;
+     if (error instanceof Error) {
+      transformationResult.value = 'Error in transformation: ' + error.message;
+    } else {
+      transformationResult.value = "unknown type of the error " + error
+    }
   }
 }, { immediate: true });
 
