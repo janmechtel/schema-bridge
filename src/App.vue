@@ -7,28 +7,27 @@ loader.config({
 })
 
 import jsonata from 'jsonata';
-import { ref, watch, computed } from 'vue';
+import { ref, watch, computed, onMounted } from 'vue';
 
 import Editor from './components/JsonEditor.vue';
 import DiffEditor from './components/JsonDiffEditor.vue';
 
-const jsonInput = ref(`{
+const jsonInput = ref(localStorage.getItem('jsonInput') || `{
   "id": "1001",
   "firstName": "Vinnie",
   "lastName": "Hickman",
   "age": 15,
   "country": "UK"
 }`);
-const jsonataExpression = ref(`{ 
+const jsonataExpression = ref(localStorage.getItem('jsonataExpression') || `{ 
   "id": id,
   "name" : firstName & " " & "try to include the last name here"
 }`);
 const transformationResult = ref('');
-const jsonTargetOutput = ref(`{
+const jsonTargetOutput = ref(localStorage.getItem('jsonTargetOutput') || `{
   "id": "1001",
   "name": "Vinnie Hickman"
 }`);
-
 // Computed property to extract keys from jsonInput
 const inputKeys = computed(() => {
   try {
@@ -47,8 +46,38 @@ const targetOutputKeys = computed(() => {
     return [];
   }
 });
+
+// Computed property to extract keys from jsonataExpression               
+const expressionKeys = computed(() => {
+  const lines = jsonataExpression.value.split('\n').slice(1, -1); // Ignore the first and last lines
+  return lines.map(line => {
+    const key = line.split(':')[0].trim(); // Get the part before the first colon
+    return key.replace(/["']/g, ''); // Remove quotes                     
+  });
+});
+
+// Save to local storage
+const saveToLocalStorage = (key: any, value: any) => {
+  localStorage.setItem(key, value);
+};
+
+// Watchers to save data to local storage
+watch(jsonInput, (newValue) => {
+  saveToLocalStorage('jsonInput', newValue);
+}, { immediate: true });
+
+watch(jsonataExpression, (newValue) => {
+  evaluateExpression()
+  saveToLocalStorage('jsonataExpression', newValue);
+}, { immediate: true });
+
+watch(jsonTargetOutput, (newValue) => {
+  evaluateExpression()
+  saveToLocalStorage('jsonTargetOutput', newValue);
+}, { immediate: true });
+
 // Watch for changes in jsonInput or jsonataExpression and apply transformation
-watch([jsonInput, jsonataExpression], () => {
+function evaluateExpression() {
   try {
     const json = JSON.parse(jsonInput.value);
     const expression = jsonata(jsonataExpression.value);
@@ -62,8 +91,16 @@ watch([jsonInput, jsonataExpression], () => {
       transformationResult.value = "unknown type of the error " + error
     }
   }
-}, { immediate: true });
+}
 
+// Load from local storage
+onMounted(() => {
+  jsonInput.value = localStorage.getItem('jsonInput') || jsonInput.value;
+  jsonataExpression.value = localStorage.getItem('jsonataExpression') || jsonataExpression.value;
+  jsonTargetOutput.value = localStorage.getItem('jsonTargetOutput') || jsonTargetOutput.value;
+});
+
+// Computed properties and other code remains unchanged
 </script>
 
 <template>
@@ -80,11 +117,15 @@ watch([jsonInput, jsonataExpression], () => {
     <div class="column">
       <h3>JSONata Expression</h3>
       <Editor v-model:value="jsonataExpression" />
+      <h3>Expression Keys</h3>
+      <ul>
+        <li v-for="key in expressionKeys" :key="key">{{ key }}</li>
+      </ul>
     </div>
     <div class="column double">
       <h3>Transformation Output & Target Output</h3>
       <DiffEditor :original="transformationResult" :modified="jsonTargetOutput" />
-      <h3>Input JSON Keys</h3>
+      <h3>Target Output JSON Keys</h3>
       <ul>
         <li v-for="key in targetOutputKeys" :key="key">{{ key }}</li>
       </ul>
