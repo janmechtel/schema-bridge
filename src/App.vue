@@ -7,11 +7,10 @@ loader.config({
 })
 
 import jsonata from 'jsonata';
-import { ref, watch, } from 'vue';
+import { ref, watch, computed } from 'vue';
 
 import Editor from './components/JsonEditor.vue';
 import DiffEditor from './components/JsonDiffEditor.vue';
-
 
 const jsonInput = ref(`{
   "id": "1001",
@@ -30,9 +29,26 @@ const jsonTargetOutput = ref(`{
   "name": "Vinnie Hickman"
 }`);
 
+// Computed property to extract keys from jsonInput
+const inputKeys = computed(() => {
+  try {
+    const json = JSON.parse(jsonInput.value);
+    return Object.keys(json);
+  } catch (error) {
+    return [];
+  }
+});
+
+const targetOutputKeys = computed(() => {
+  try {
+    const json = JSON.parse(jsonTargetOutput.value);
+    return Object.keys(json);
+  } catch (error) {
+    return [];
+  }
+});
 // Watch for changes in jsonInput or jsonataExpression and apply transformation
 watch([jsonInput, jsonataExpression], () => {
-
   try {
     const json = JSON.parse(jsonInput.value);
     const expression = jsonata(jsonataExpression.value);
@@ -56,6 +72,10 @@ watch([jsonInput, jsonataExpression], () => {
     <div class="column">
       <h3>JSON Input</h3>
       <Editor v-model:value="jsonInput" />
+      <h3>Input JSON Keys</h3>
+      <ul>
+        <li v-for="key in inputKeys" :key="key">{{ key }}</li>
+      </ul>
     </div>
     <div class="column">
       <h3>JSONata Expression</h3>
@@ -64,6 +84,10 @@ watch([jsonInput, jsonataExpression], () => {
     <div class="column double">
       <h3>Transformation Output & Target Output</h3>
       <DiffEditor :original="transformationResult" :modified="jsonTargetOutput" />
+      <h3>Input JSON Keys</h3>
+      <ul>
+        <li v-for="key in targetOutputKeys" :key="key">{{ key }}</li>
+      </ul>
     </div>
   </div>
 </template>
@@ -71,7 +95,7 @@ watch([jsonInput, jsonataExpression], () => {
 <style scoped>
 .text-area-container {
   display: flex;
-  height: 85vh;
+  height: 40vh;
   width: 100%;
 }
 

@@ -34,7 +34,11 @@ When building integrations between APIs one is often faced with stichting those 
 - [X] show a diff between transformation output and target
 - [X] refactor the diff editor into it's own component
 
-- [ ] visual mapping (without editing) - show a table, highlight back to the code areas? can everything stay in one line?
+- [ ] visual mapping (without editing) 
+    - [X] show a list of source & target fields
+    - show a list of transformation fields  - how to parse the jsonata expression
+    - show a table with 3 columns "source" "target" "transformation"
+    - selecting a row highlights back to the code edit areas? can everything stay in one line?
 
 - [ ] register [jsonata as language](https://github.com/jsonata-js/jsonata-exerciser/blob/master/src/jsonataMode.js)
 
