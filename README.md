@@ -32,16 +32,19 @@ When building integrations between APIs one is often faced with stichting those 
 - [X] better editor (json syntax highlighting etc. using Monaco)
 
 - [X] show a diff between transformation output and target
+- [X] refactor the diff editor into it's own component
+
+- [ ] visual mapping (without editing) - show a table, highlight back to the code areas? can everything stay in one line?
 
 - [ ] register [jsonata as language](https://github.com/jsonata-js/jsonata-exerciser/blob/master/src/jsonataMode.js)
 
-- [ ] visual mapping (without editing) - show a table, highlight back to the code areas? can everything stay in one line?
 - [ ] filtering (only show fields that are mapped or not mapped)
 - [ ] test/support arrays - How to deal with their type?
 - [ ] easy way to import & export everything
 - [ ] work with OpenAPI spec 
 - [ ] support for descriptions types and required fields
 - [ ] enable editing in the visual part
+- [ ] UI collapse, resize the editors more freely
 
 # Recommended IDE Setup
 

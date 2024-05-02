@@ -1,16 +1,18 @@
 <script setup lang="ts">
 
 import { VueMonacoEditor } from '@guolao/vue-monaco-editor'
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 const model = defineModel<string | undefined>()
 
 
-const MONACO_EDITOR_OPTIONS = {
+const OPTIONS: monaco.editor.IStandaloneEditorConstructionOptions = {
   automaticLayout: true,
   formatOnType: true,
   formatOnPaste: true,
   minimap: {
     enabled: false
   },
+  wordWrap: "on",
 }
 
 
@@ -21,8 +23,6 @@ const MONACO_EDITOR_OPTIONS = {
     v-model:value="model" 
     theme="vs-dark"
     language="json"
-    :options="MONACO_EDITOR_OPTIONS"  
+    :options="OPTIONS"  
   />
 </template>
-
-<style scoped></style>

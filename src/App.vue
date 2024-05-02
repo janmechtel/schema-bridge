@@ -6,12 +6,12 @@ loader.config({
   },
 })
 
-import { VueMonacoDiffEditor } from '@guolao/vue-monaco-editor'
-
 import jsonata from 'jsonata';
-import { ref, watch, shallowRef } from 'vue';
+import { ref, watch, } from 'vue';
 
 import Editor from './components/JsonEditor.vue';
+import DiffEditor from './components/JsonDiffEditor.vue';
+
 
 const jsonInput = ref(`{
   "id": "1001",
@@ -30,9 +30,6 @@ const jsonTargetOutput = ref(`{
   "name": "Vinnie Hickman"
 }`);
 
-const diffEditorRef = shallowRef()
-const handleMount = diffEditor => (diffEditorRef.value = diffEditor)
-
 // Watch for changes in jsonInput or jsonataExpression and apply transformation
 watch([jsonInput, jsonataExpression], () => {
 
@@ -49,20 +46,7 @@ watch([jsonInput, jsonataExpression], () => {
       transformationResult.value = "unknown type of the error " + error
     }
   }
-  if (diffEditorRef.value) {
-    diffEditorRef.value.getOriginalEditor().setValue(transformationResult.value);
-    diffEditorRef.value.getModifiedEditor().readOnly = false;
-  }
 }, { immediate: true });
-
-
-const OPTIONS2 = {
-  automaticLayout: true,
-  formatOnType: true,
-  formatOnPaste: true,
-  readOnly: false,
-  language: "json",
-};
 
 </script>
 
@@ -77,44 +61,34 @@ const OPTIONS2 = {
       <h3>JSONata Expression</h3>
       <Editor v-model:value="jsonataExpression" />
     </div>
-    <div class="column2">
+    <div class="column double">
       <h3>Transformation Output & Target Output</h3>
-      <vue-monaco-diff-editor theme="vs-dark" :original="transformationResult" :modified="jsonTargetOutput"
-        :options="OPTIONS2" @mount="handleMount" />
+      <DiffEditor :original="transformationResult" :modified="jsonTargetOutput" />
     </div>
   </div>
-
 </template>
 
-  <style scoped>
-    .text-area-container {
-      display: flex;
-      height: 85vh;
-      width: 100%;
-    }
+<style scoped>
+.text-area-container {
+  display: flex;
+  height: 85vh;
+  width: 100%;
+}
 
-    .column {
-      flex: 1;
-      padding: 0 10px;
-    }
+.column {
+  flex: 1;
+  padding: 0 10px;
+}
 
-    .column2 {
-      flex: 2;
-      padding: 0 10px;
-    }
+.double {
+  flex: 2;
+}
 
-    .column:first-child {
-      padding-left: 0;
-    }
+.column:first-child {
+  padding-left: 0;
+}
 
-    .column:last-child {
-      padding-right: 0;
-    }
-  </style>
-
-
-
-
-
-
-
+.column:last-child {
+  padding-right: 0;
+}
+</style>
