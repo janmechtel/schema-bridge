@@ -31,7 +31,8 @@ When building integrations between APIs one is often faced with stichting those 
 - [X] add a target area
 - [X] better editor (json syntax highlighting etc. using Monaco)
 
-- [ ] show a diff between transformation output and target https://github.com/imguolao/monaco-vue?tab=readme-ov-file#diff-editor
+- [X] show a diff between transformation output and target
+
 - [ ] register [jsonata as language](https://github.com/jsonata-js/jsonata-exerciser/blob/master/src/jsonataMode.js)
 
 - [ ] visual mapping (without editing) - show a table, highlight back to the code areas? can everything stay in one line?

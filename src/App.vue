@@ -6,11 +6,13 @@ loader.config({
   },
 })
 
+import { VueMonacoDiffEditor } from '@guolao/vue-monaco-editor'
+
 import jsonata from 'jsonata';
-import { ref, watch } from 'vue';
+import { ref, watch, shallowRef } from 'vue';
 
 import Editor from './components/JsonEditor.vue';
-  
+
 const jsonInput = ref(`{
   "id": "1001",
   "firstName": "Vinnie",
@@ -28,8 +30,12 @@ const jsonTargetOutput = ref(`{
   "name": "Vinnie Hickman"
 }`);
 
+const diffEditorRef = shallowRef()
+const handleMount = diffEditor => (diffEditorRef.value = diffEditor)
+
 // Watch for changes in jsonInput or jsonataExpression and apply transformation
 watch([jsonInput, jsonataExpression], () => {
+
   try {
     const json = JSON.parse(jsonInput.value);
     const expression = jsonata(jsonataExpression.value);
@@ -43,7 +49,20 @@ watch([jsonInput, jsonataExpression], () => {
       transformationResult.value = "unknown type of the error " + error
     }
   }
+  if (diffEditorRef.value) {
+    diffEditorRef.value.getOriginalEditor().setValue(transformationResult.value);
+    diffEditorRef.value.getModifiedEditor().readOnly = false;
+  }
 }, { immediate: true });
+
+
+const OPTIONS2 = {
+  automaticLayout: true,
+  formatOnType: true,
+  formatOnPaste: true,
+  readOnly: false,
+  language: "json",
+};
 
 </script>
 
@@ -52,40 +71,46 @@ watch([jsonInput, jsonataExpression], () => {
   <div class="text-area-container">
     <div class="column">
       <h3>JSON Input</h3>
-      <Editor v-model:value="jsonInput"/>
+      <Editor v-model:value="jsonInput" />
     </div>
     <div class="column">
       <h3>JSONata Expression</h3>
       <Editor v-model:value="jsonataExpression" />
     </div>
-    <div class="column">
-      <h3>Transformation Result</h3>
-      <Editor v-model:value="transformationResult" />
-    </div>
-    <div class="column">
-      <h3>JSON Target Output</h3>
-      <Editor v-model:value="jsonTargetOutput" />
+    <div class="column2">
+      <h3>Transformation Output & Target Output</h3>
+      <vue-monaco-diff-editor theme="vs-dark" :original="transformationResult" :modified="jsonTargetOutput"
+        :options="OPTIONS2" @mount="handleMount" />
     </div>
   </div>
+
 </template>
 
-<style scoped>
-.text-area-container {
-  display: flex;
-  height: 100vh;
-  width: 100%;
-}
-.column {
-  flex: 1;
-  padding: 0 10px;
-}
-.column:first-child {
-  padding-left: 0;
-}
-.column:last-child {
-  padding-right: 0;
-}
-</style>
+  <style scoped>
+    .text-area-container {
+      display: flex;
+      height: 85vh;
+      width: 100%;
+    }
+
+    .column {
+      flex: 1;
+      padding: 0 10px;
+    }
+
+    .column2 {
+      flex: 2;
+      padding: 0 10px;
+    }
+
+    .column:first-child {
+      padding-left: 0;
+    }
+
+    .column:last-child {
+      padding-right: 0;
+    }
+  </style>
 
 
 
