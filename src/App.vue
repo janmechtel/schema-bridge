@@ -122,7 +122,7 @@ onMounted(() => {
         <li v-for="key in expressionKeys" :key="key">{{ key }}</li>
       </ul>
     </div>
-    <div class="column double">
+    <div class="column, double">
       <h3>Transformation Output & Target Output</h3>
       <DiffEditor :original="transformationResult" :modified="jsonTargetOutput" />
       <h3>Target Output JSON Keys</h3>

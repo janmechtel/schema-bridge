@@ -33,24 +33,27 @@ When building integrations between APIs one is often faced with stichting those 
 
 - [X] show a diff between transformation output and target
 - [X] refactor the diff editor into it's own component
-- [ ] easy way to import & export everything
 
-- Test with something real
+- [ ] easy way to import & export everything
 
 - [ ] visual mapping (without editing) 
     - [X] show a list of source & target fields
-    - [X] show a list of transformation fields
+    - [X] show a list of transformation fields    
     - show a table with 3 columns "source" "target" "transformation"
-    - selecting a row highlights back to the code edit areas? can everything stay in one line?
+    - use vue diagram editor
 
-- [ ] register [jsonata as language](https://github.com/jsonata-js/jsonata-exerciser/blob/master/src/jsonataMode.js)
-
-- [ ] filtering (only show fields that are mapped or not mapped)
-- [ ] test/support arrays - How to deal with their type?
-- [ ] work with OpenAPI spec 
-- [ ] support for descriptions types and required fields
-- [ ] enable editing in the visual part
 - [ ] UI collapse, resize the editors more freely
+- [ ] filtering (only show fields that are mapped or not mapped)
+
+- [ ] test/support arrays - How to deal with their type?
+
+- [ ] visualization: selecting a row highlights back to the code edit areas? can everything stay in one line?
+- [ ] work with OpenAPI spec 
+  - [ ] support for descriptions types and required fields
+
+- [ ] QAL: register [jsonata as language](https://github.com/jsonata-js/jsonata-exerciser/blob/master/src/jsonataMode.js)
+
+- [ ] enable editing in the visual part
 
 # Recommended IDE Setup
 
